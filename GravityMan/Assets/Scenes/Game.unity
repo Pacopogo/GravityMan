@@ -906,6 +906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321882674}
   - component: {fileID: 1321882675}
+  - component: {fileID: 1321882676}
   m_Layer: 0
   m_Name: World/Game
   m_TagString: Untagged
@@ -939,7 +940,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321882673}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1061c8a36bd6c440aadc56e7cf03861, type: 3}
   m_Name: 
@@ -990,6 +991,30 @@ MonoBehaviour:
   spikeSpeed: 6
   deathWallCol: {fileID: 1995694861}
   scrollerObjects: []
+--- !u!114 &1321882676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321882673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f863e7c1bb560d241918f0e4e0309dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    MaxHealth: 5
+    Health: 0
+    PlayerBody: {fileID: 1908951861}
+    GravityPull: 2
+  obstacles:
+  - obj: {fileID: 7890854642052672182, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
+    CanDamage: 0
+    Speed: 6
+  - obj: {fileID: 5389428761247643856, guid: 38f77e747462b984f825bae5afde8678, type: 3}
+    CanDamage: 0
+    Speed: 4
 --- !u!1 &1391131551
 GameObject:
   m_ObjectHideFlags: 0
