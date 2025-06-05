@@ -1,10 +1,19 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
     [SerializeField] private PlayerData player;
     [SerializeField] private Obstacle[] obstacles;
+
+    [Header("Object List")]
+    [SerializeField] private List<GameObject> damageObjects;
+    [SerializeField] private List<GameObject> healingObjects;
+
+    [SerializeField] private List<GameObject> SpawnedObjects;
+    bool flip = false;
+
+
 
     private void Start()
     {
@@ -17,8 +26,13 @@ public class Game : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 GameObject obj = Instantiate(obstacle.obj);
-                float rnd = Random.Range(-4, 4);
-                obj.transform.position = new Vector3(0, rnd, 0);
+
+                if (obstacle.CanDamage)
+                    damageObjects.Add(obj);
+                else
+                    healingObjects.Add(obj);
+
+                obj.SetActive(false);
             }
         }
     }
@@ -26,5 +40,10 @@ public class Game : MonoBehaviour
     private void Update()
     {
         player.PlayerUpdate();
+    }
+
+    private void SpawnRandomObject()
+    {
+        
     }
 }
