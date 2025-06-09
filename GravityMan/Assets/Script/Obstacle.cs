@@ -9,5 +9,4 @@ public class Obstacle : ScriptableObject
     [Header("Settings")]
     public bool CanDamage = false;
     public float Speed = 6f;
-
 }

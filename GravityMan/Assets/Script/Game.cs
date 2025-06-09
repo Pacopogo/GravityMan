@@ -1,33 +1,40 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Game : MonoBehaviour
 {
     [SerializeField] private PlayerData player;
+    [Space(20)]
     [SerializeField] private Obstacle[] obstacles;
 
-    private List<Obstacle> damageObstacles;
+    [SerializeField] private PlayerInputKeys keys;
+    private IPlayerInputs inputs;
+
 
     private void Start()
     {
+        inputs = player;
+
         //set Player hp
         player.Health = player.MaxHealth;
 
         //spawn 5 of each added object type
-        foreach (var obstacle in obstacles)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                GameObject obj = Instantiate(obstacle.prefab);
-                float rnd = Random.Range(-4, 4);
-                obj.transform.position = new Vector3(0, rnd, 0);
-            }
-        }
+        InizializeObjects();
     }
+
+    private void InizializeObjects()
+    {
+        
+    }
+
+
 
     private void Update()
     {
-        player.PlayerUpdate();
+        inputs.FlipGravity(keys.Jump);
+        
     }
+
+    
 }

@@ -920,11 +920,13 @@ MonoBehaviour:
   player:
     MaxHealth: 5
     Health: 0
+    Collider: {fileID: 1908951862}
     PlayerBody: {fileID: 1908951861}
     GravityPull: 2
   obstacles:
   - {fileID: 11400000, guid: d456ce73a5254e84f9683bfb28c0bc8c, type: 2}
   - {fileID: 11400000, guid: 0cf7fe6df299ac04086a057d5f50adda, type: 2}
+  keys: {fileID: 11400000, guid: b5229384732e06a4b8a8e9c964e0ecf5, type: 2}
 --- !u!1 &1391131551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5762,6 +5764,11 @@ Transform:
 --- !u!50 &1908951861 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+  m_PrefabInstance: {fileID: 7172007747315288189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1908951862 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4916792559320187756, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
   m_PrefabInstance: {fileID: 7172007747315288189}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4172673918712978234
