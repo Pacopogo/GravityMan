@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-<<<<<<< Updated upstream
-=======
 using Unity.VisualScripting;
->>>>>>> Stashed changes
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -10,18 +7,7 @@ public class Game : MonoBehaviour
     [SerializeField] private PlayerData player;
     [SerializeField] private Obstacle[] obstacles;
 
-<<<<<<< Updated upstream
-    [Header("Object List")]
-    [SerializeField] private List<GameObject> damageObjects;
-    [SerializeField] private List<GameObject> healingObjects;
-
-    [SerializeField] private List<GameObject> SpawnedObjects;
-    bool flip = false;
-
-
-=======
     private List<Obstacle> damageObstacles;
->>>>>>> Stashed changes
 
     private void Start()
     {
@@ -33,20 +19,9 @@ public class Game : MonoBehaviour
         {
             for (int i = 0; i < 5; i++)
             {
-<<<<<<< Updated upstream
-                GameObject obj = Instantiate(obstacle.obj);
-
-                if (obstacle.CanDamage)
-                    damageObjects.Add(obj);
-                else
-                    healingObjects.Add(obj);
-
-                obj.SetActive(false);
-=======
                 GameObject obj = Instantiate(obstacle.prefab);
                 float rnd = Random.Range(-4, 4);
                 obj.transform.position = new Vector3(0, rnd, 0);
->>>>>>> Stashed changes
             }
         }
     }
@@ -54,10 +29,5 @@ public class Game : MonoBehaviour
     private void Update()
     {
         player.PlayerUpdate();
-    }
-
-    private void SpawnRandomObject()
-    {
-        
     }
 }
