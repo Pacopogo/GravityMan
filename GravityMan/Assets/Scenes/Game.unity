@@ -168,17 +168,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &183334412 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8009692783649723070, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
-  m_PrefabInstance: {fileID: 7172007747315288189}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &199604147
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,11 +549,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!223 &837901275 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 2467879246372553698, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
-  m_PrefabInstance: {fileID: 7172007747315288189}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &867141589
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,17 +869,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4390980444204440735, guid: 948bd21f5a9262f4a9fa23dd99b57483, type: 3}
   m_PrefabInstance: {fileID: 4172673918712978234}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1125663823 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
-  m_PrefabInstance: {fileID: 7172007747315288189}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1321882673
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,55 +914,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321882673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1061c8a36bd6c440aadc56e7cf03861, type: 3}
+  m_Script: {fileID: 11500000, guid: 466e062092431e340a7b1b7f5cf41351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnTrans: {fileID: 534397188}
-  playerObj: {fileID: 1908951857}
-  playerRB: {fileID: 1908951861}
-  playerCol: {fileID: 1908951862}
-  playerAni: {fileID: 1908951860}
-  playerCanvas: {fileID: 837901275}
-  playerSlider: {fileID: 183334412}
-  playerSpeedText: {fileID: 1125663823}
-  flipInput: 32
-  gravityPull: 2
-  playerMaxHp: 10
-  OnPlayerHit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1908951861}
-        m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
-        m_MethodName: set_linearVelocityX
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1908951857}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  deathSpikeObj: {fileID: 7890854642052672182, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-  spikeAmount: 5
-  spikeSpeed: 6
-  deathWallCol: {fileID: 1995694861}
-  scrollerObjects: []
+  player:
+    MaxHealth: 5
+    Health: 0
+    PlayerBody: {fileID: 1908951861}
+    GravityPull: 2
+  obstacles:
+  - {fileID: 11400000, guid: d456ce73a5254e84f9683bfb28c0bc8c, type: 2}
+  - {fileID: 11400000, guid: 0cf7fe6df299ac04086a057d5f50adda, type: 2}
 --- !u!1 &1391131551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5824,30 +5759,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &1908951857 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9183172869949929526, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
-  m_PrefabInstance: {fileID: 7172007747315288189}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1908951860 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8317096648950224850, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
-  m_PrefabInstance: {fileID: 7172007747315288189}
-  m_PrefabAsset: {fileID: 0}
 --- !u!50 &1908951861 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
   m_PrefabInstance: {fileID: 7172007747315288189}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1908951862 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4916792559320187756, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
-  m_PrefabInstance: {fileID: 7172007747315288189}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1995694861 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4093022865934493982, guid: 948bd21f5a9262f4a9fa23dd99b57483, type: 3}
-  m_PrefabInstance: {fileID: 4172673918712978234}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4172673918712978234
 PrefabInstance:
