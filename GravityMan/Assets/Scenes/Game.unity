@@ -936,6 +936,7 @@ MonoBehaviour:
     PlayerBody: {fileID: 1908951861}
     GravityPull: 2
   obstacles:
+<<<<<<< Updated upstream
   - obj: {fileID: 7890854642052672182, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
     CanDamage: 1
     Speed: 6
@@ -945,6 +946,10 @@ MonoBehaviour:
   damageObjects: []
   healingObjects: []
   SpawnedObjects: []
+=======
+  - {fileID: 11400000, guid: 0cf7fe6df299ac04086a057d5f50adda, type: 2}
+  - {fileID: 11400000, guid: d456ce73a5254e84f9683bfb28c0bc8c, type: 2}
+>>>>>>> Stashed changes
 --- !u!1 &1391131551
 GameObject:
   m_ObjectHideFlags: 0

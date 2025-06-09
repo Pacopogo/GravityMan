@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8522401473276939736}
   - component: {fileID: 7885291541578874212}
   m_Layer: 0
-  m_Name: ScrollingObject
+  m_Name: HealthOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

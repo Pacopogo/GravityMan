@@ -1,10 +1,10 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Obstacle
+[CreateAssetMenu(fileName = "Obstacles", menuName = "Obstacle/Obstacle", order = 1)]
+public class Obstacle : ScriptableObject
 {
     [Header("Prefab")]
-    public GameObject obj;
+    public GameObject prefab;
 
     [Header("Settings")]
     public bool CanDamage = false;
