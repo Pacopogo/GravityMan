@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Spike
   m_EditorClassIdentifier: 
   prefab: {fileID: 7890854642052672182, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-  CanDamage: 1
+  Type: 1
   Speed: 6

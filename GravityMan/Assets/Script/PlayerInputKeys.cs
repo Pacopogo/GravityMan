@@ -11,5 +11,6 @@ public class PlayerInputKeys : ScriptableObject
 
     [Header("Actions")]
     public KeyCode[] Jump;
+    public KeyCode[] Pause;
 
 }

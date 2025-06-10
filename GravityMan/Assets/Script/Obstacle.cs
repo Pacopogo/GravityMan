@@ -1,5 +1,13 @@
 using UnityEngine;
 
+
+public enum objectType
+{
+    None,
+    Damage,
+    Heal
+}
+
 [CreateAssetMenu(fileName = "Obstacles", menuName = "Obstacle/Obstacle", order = 1)]
 public class Obstacle : ScriptableObject
 {
@@ -7,6 +15,6 @@ public class Obstacle : ScriptableObject
     public GameObject prefab;
 
     [Header("Settings")]
-    public bool CanDamage = false;
+    public objectType Type;
     public float Speed = 6f;
 }

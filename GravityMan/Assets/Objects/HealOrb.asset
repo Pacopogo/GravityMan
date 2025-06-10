@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HealOrb
   m_EditorClassIdentifier: 
   prefab: {fileID: 5389428761247643856, guid: 38f77e747462b984f825bae5afde8678, type: 3}
-  CanDamage: 0
-  Speed: 6
+  Type: 2
+  Speed: 9

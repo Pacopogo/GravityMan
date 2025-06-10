@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IPlayerInputs
 {
-    public void FlipGravity(KeyCode[] key);
-    public void PauseGame();
+    public void Jump(KeyCode[] key);
+    public bool PauseGame(KeyCode[] key, bool isPaused);
 }
