@@ -30,7 +30,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6338669741878665953}
   - {fileID: 406602116862238475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69,7 +68,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.35
+  m_Radius: 0.45
 --- !u!1 &5540836260462800470
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,77 +156,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &6891014610707924799
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8522401473276939736}
-    m_Modifications:
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1716590609012949985, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1716590609012949985, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7890854642052672182, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_Name
-      value: DeathSpike
-      objectReference: {fileID: 0}
-    - target: {fileID: 7890854642052672182, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
---- !u!4 &6338669741878665953 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 600869690666132958, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
-  m_PrefabInstance: {fileID: 6891014610707924799}
-  m_PrefabAsset: {fileID: 0}

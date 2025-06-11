@@ -48,13 +48,12 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        inputs.Jump(keys.Jump);
         isPlaying = inputs.PauseGame(keys.Pause, isPlaying);
 
         if (!isPlaying)
             return;
 
-        UpdateActiveObjects();
+        inputs.Jump(keys.Jump);
     }
 
     private void FixedUpdate()
@@ -63,9 +62,11 @@ public class Game : MonoBehaviour
             return;
 
         CollisionCheck();
+        UpdateActiveObjects();
+
         player.PlayerUpdate();
 
-        globalSpeed += 1 * Time.fixedDeltaTime;
+        globalSpeed += 0.5f * Time.fixedDeltaTime;
 
         if (speedText != null)
             speedText.text = globalSpeed.ToString("f1") + " M/s";
@@ -168,7 +169,7 @@ public class Game : MonoBehaviour
                 break;
             }
 
-            obj.transform.Translate(Vector2.left * globalSpeed * Time.deltaTime);
+            obj.transform.Translate(Vector2.left * globalSpeed * Time.fixedDeltaTime);
         }
     }
     private void CollisionCheck()

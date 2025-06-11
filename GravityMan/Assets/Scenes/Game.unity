@@ -1033,12 +1033,13 @@ MonoBehaviour:
   globalSpeed: 6
   speedText: {fileID: 177160463}
   player:
+    anim: {fileID: 1908951863}
     healthSlider: {fileID: 1453721927}
     MaxHealth: 5
     Health: 0
     Collider: {fileID: 1908951862}
     PlayerBody: {fileID: 1908951861}
-    GravityPull: 8
+    GravityPull: 450
   spawnRange: 4
   obstacles:
   - {fileID: 11400000, guid: d456ce73a5254e84f9683bfb28c0bc8c, type: 2}
@@ -5976,6 +5977,11 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 4916792559320187756, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
   m_PrefabInstance: {fileID: 7172007747315288189}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1908951863 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8317096648950224850, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+  m_PrefabInstance: {fileID: 7172007747315288189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4172673918712978234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6341,6 +6347,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.57946044
       objectReference: {fileID: 0}
+    - target: {fileID: 2467879246372553698, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804512642397771328, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397593223813445635, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3979266992881798952, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -6411,7 +6429,7 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: 5e1a4fe348a91c743bc9be43e4a8edd4, type: 2}
     - target: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
       propertyPath: m_Interpolate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
       propertyPath: m_GravityScale
@@ -6419,7 +6437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9183172869949929526, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
       propertyPath: m_Name

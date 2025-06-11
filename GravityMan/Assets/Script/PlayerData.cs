@@ -4,6 +4,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class PlayerData : IPlayerInputs
 {
+    [SerializeField] private Animator anim;
+
     [Header("UI Components")]
     [SerializeField] private Slider healthSlider;
 
@@ -54,6 +56,9 @@ public class PlayerData : IPlayerInputs
 
             isPaused = !isPaused;
 
+            PlayerBody.simulated = isPaused;
+
+
             return isPaused;
         }
         return isPaused;
@@ -79,10 +84,11 @@ public class PlayerData : IPlayerInputs
     public void PlayerUpdate()
     {
         PlayerMove();
+        anim.SetBool("Flip", !gravityFlip);
     }
 
     private void PlayerMove()
     {
-        PlayerBody.transform.Translate(Vector3.down * playerMoveDir * Time.fixedDeltaTime);
+        PlayerBody.linearVelocityY = playerMoveDir * Time.deltaTime;    
     }
 }
