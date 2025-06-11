@@ -34,6 +34,9 @@ public class Game : MonoBehaviour
     [Header("Objectpool Settings")]
     [SerializeField] private int PoolSize = 5;
 
+    private Objectpool damagePool;
+    private Objectpool healPool;
+
     public bool isPlaying = false;
 
     private void Start()
@@ -42,8 +45,21 @@ public class Game : MonoBehaviour
 
         player.PlayerStart();
 
-        //spawn 5 of each added object type
-        InizializeObjects();
+        foreach (var obj in obstacles)
+        {
+
+            switch (obj.Type)
+            {
+                case objectType.None:
+                    break;
+                case objectType.Damage:
+                    damagePool = new Objectpool(obj.prefab, PoolSize, this);
+                    break;
+                case objectType.Heal:
+                    healPool = new Objectpool(obj.prefab, PoolSize, this);
+                    break;
+            }
+        }
     }
 
     private void Update()
@@ -71,86 +87,28 @@ public class Game : MonoBehaviour
         if (speedText != null)
             speedText.text = globalSpeed.ToString("f1") + " M/s";
     }
-
-    private void InizializeObjects()
+    private void SpawnObject(objectType type)
     {
-        GameObject currentObject;
-        foreach (var obstacle in obstacles)
-        {
-            for (int i = 0; i < PoolSize; i++)
-            {
-                currentObject = Instantiate(obstacle.prefab);
-                SortObject(currentObject, obstacle.Type);
-                currentObject.SetActive(false);
-            }
-        }
+        GameObject current = null;
+        float rnd = Random.Range(-spawnRange, spawnRange);
 
-    }
-    private void SortObject(GameObject obj, objectType type)
-    {
         switch (type)
         {
             case objectType.None:
-                noneObj.Add(obj);
+                current = damagePool.Get();
                 break;
-
             case objectType.Damage:
-                damageObj.Add(obj);
+                current = damagePool.Get();
                 break;
-
             case objectType.Heal:
-                healObj.Add(obj);
-                break;
-            default:
+                current = healPool.Get();
                 break;
         }
-    }
-    private void SpawnObject(List<GameObject> list)
-    {
-        GameObject current;
-        float rnd = Random.Range(-spawnRange, spawnRange);
-        current = GetFromPool(list);
-        if (!current)
-        {
-            AddToPool(list);
-            current = GetFromPool(list);
-        }
+
         current.transform.position = new Vector3(10, rnd, 0);
+        activeObjects.Add(current);
     }
-    #region ObjectPool
 
-    private void AddToPool(List<GameObject> list)
-    {
-        GameObject obj = list[0];
-        GameObject newObj;
-
-        for (int i = 0; i < PoolSize; i++)
-        {
-            newObj = Instantiate(obj);
-            newObj.SetActive(false);
-            list.Add(newObj);
-        }
-    }
-    private GameObject GetFromPool(List<GameObject> list)
-    {
-        foreach (GameObject obj in list)
-        {
-            if (obj.activeInHierarchy)
-                continue;
-
-            obj.SetActive(true);
-            activeObjects.Add(obj);
-            return obj;
-        }
-
-        return null;
-    }
-    private void ReturnToPool(GameObject obj)
-    {
-        activeObjects.Remove(obj);
-        obj.SetActive(false);
-    }
-    #endregion
     private void UpdateActiveObjects()
     {
         if (activeObjects.Count == 0)
@@ -165,7 +123,8 @@ public class Game : MonoBehaviour
         {
             if (obj.transform.position.x <= -10)
             {
-                ReturnToPool(obj);
+                obj.SetActive(false);
+                activeObjects.Remove(obj);
                 break;
             }
 
@@ -176,27 +135,28 @@ public class Game : MonoBehaviour
     {
         foreach (GameObject obj in activeObjects)
         {
+            //Object to player collision check (if > false > continue)
             if (!obj.GetComponent<Collider2D>().bounds.Contains(player.PlayerBody.position))
                 continue;
 
-            foreach (GameObject dmg in damageObj)
+            foreach (GameObject dmg in damagePool.PoolObjects)
             {
                 if (obj != dmg)
                     continue;
 
                 Debug.Log("DMG");
-                ReturnToPool(obj);
+                damagePool.ReturnToPool(obj);
                 player.TakeDamage(1);
                 return;
             }
 
-            foreach (GameObject heal in healObj)
+            foreach (GameObject heal in healPool.PoolObjects)
             {
                 if (obj != heal)
                     continue;
 
                 Debug.Log("HEAL");
-                ReturnToPool(obj);
+                healPool.ReturnToPool(obj);
                 player.Heal(1);
                 return;
             }
@@ -206,7 +166,7 @@ public class Game : MonoBehaviour
                 if (obj != none)
                     continue;
 
-                ReturnToPool(obj);
+                damagePool.ReturnToPool(obj);
                 return;
             }
         }
@@ -220,7 +180,7 @@ public class Game : MonoBehaviour
 
         for (int i = 0; i < amountRND; i++)
         {
-            SpawnObject(damageObj);
+            SpawnObject(objectType.Damage);
             yield return new WaitForSeconds(timeRND);
         }
 
@@ -233,11 +193,18 @@ public class Game : MonoBehaviour
 
         for (int i = 0; i < amountRND; i++)
         {
-            SpawnObject(healObj);
+            SpawnObject(objectType.Heal);
             yield return new WaitForSeconds(timeRND);
         }
 
         StopCoroutine(SpawnDamageObjects());
+    }
+
+    //Instantiate from game script so I can put it into the objectpool script
+    public GameObject instantiateObject(GameObject prefab)
+    {
+        GameObject newObject = Instantiate(prefab);
+        return newObject;
     }
 
 }
