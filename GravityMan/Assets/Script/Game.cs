@@ -10,7 +10,6 @@ public class Game : MonoBehaviour
     [Header("Game Settings")]
     [SerializeField] private float globalSpeed = 6;
 
-
     [Header("Game UI components")]
     [SerializeField] private TMP_Text speedText;
 
@@ -26,9 +25,6 @@ public class Game : MonoBehaviour
     private IPlayerInputs inputs;
 
     [Header("Object Lists")]
-    [SerializeField] private List<GameObject> noneObj;
-    [SerializeField] private List<GameObject> healObj;
-    [SerializeField] private List<GameObject> damageObj;
     private List<GameObject> activeObjects = new List<GameObject>();
 
     [Header("Objectpool Settings")]
@@ -36,6 +32,7 @@ public class Game : MonoBehaviour
 
     private Objectpool damagePool;
     private Objectpool healPool;
+    private Objectpool nonePool;
 
     public bool isPlaying = false;
 
@@ -47,10 +44,10 @@ public class Game : MonoBehaviour
 
         foreach (var obj in obstacles)
         {
-
             switch (obj.Type)
             {
                 case objectType.None:
+                    nonePool = new Objectpool(obj.prefab, PoolSize, this);
                     break;
                 case objectType.Damage:
                     damagePool = new Objectpool(obj.prefab, PoolSize, this);
@@ -87,23 +84,10 @@ public class Game : MonoBehaviour
         if (speedText != null)
             speedText.text = globalSpeed.ToString("f1") + " M/s";
     }
-    private void SpawnObject(objectType type)
+    private void SpawnObject(Objectpool pool)
     {
-        GameObject current = null;
+        GameObject current = pool.Get();
         float rnd = Random.Range(-spawnRange, spawnRange);
-
-        switch (type)
-        {
-            case objectType.None:
-                current = damagePool.Get();
-                break;
-            case objectType.Damage:
-                current = damagePool.Get();
-                break;
-            case objectType.Heal:
-                current = healPool.Get();
-                break;
-        }
 
         current.transform.position = new Vector3(10, rnd, 0);
         activeObjects.Add(current);
@@ -161,7 +145,7 @@ public class Game : MonoBehaviour
                 return;
             }
 
-            foreach (GameObject none in noneObj)
+            foreach (GameObject none in nonePool.PoolObjects)
             {
                 if (obj != none)
                     continue;
@@ -180,7 +164,7 @@ public class Game : MonoBehaviour
 
         for (int i = 0; i < amountRND; i++)
         {
-            SpawnObject(objectType.Damage);
+            SpawnObject(damagePool);
             yield return new WaitForSeconds(timeRND);
         }
 
@@ -193,7 +177,7 @@ public class Game : MonoBehaviour
 
         for (int i = 0; i < amountRND; i++)
         {
-            SpawnObject(objectType.Heal);
+            SpawnObject(healPool);
             yield return new WaitForSeconds(timeRND);
         }
 
