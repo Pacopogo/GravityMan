@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +21,21 @@ public class PlayerData : IPlayerInputs
     private float playerMoveDir;
     private bool gravityFlip = false;
 
+    private CommandManager commandManager;
+
+    private Action jumpAction;
+    private Action pauseAction;
+
     public void PlayerStart()
     {
+        commandManager = new CommandManager(this);
+
+        jumpAction += FlipGravity;
+        anim.SetBool("Flip", !gravityFlip);
+
+
+        pauseAction += PauseToggle; 
+
         Health = MaxHealth;
 
         healthSlider.maxValue = MaxHealth;
@@ -36,32 +50,23 @@ public class PlayerData : IPlayerInputs
             if(!Input.GetKeyDown(keyCode))
                 continue;
 
-            gravityFlip = !gravityFlip;
-            PlayerBody.linearVelocityY = 0;
-
-            playerMoveDir = gravityFlip ? GravityPull : -GravityPull;
+            commandManager.DoCommand(commandManager.Jump, jumpAction);
 
             return;
         }
     }
 
-    public bool PauseGame(KeyCode[] key, bool isPaused)
+    public void PauseGame(KeyCode[] key)
     {
-        
-        //change game state
         foreach (KeyCode keyCode in key)
         {
             if (!Input.GetKeyDown(keyCode))
                 continue;
 
-            isPaused = !isPaused;
+            commandManager.DoCommand(commandManager.Pause, pauseAction);
 
-            PlayerBody.simulated = isPaused;
-
-
-            return isPaused;
+            return;
         }
-        return isPaused;
     }
 
     public void TakeDamage(float dmg)
@@ -84,11 +89,29 @@ public class PlayerData : IPlayerInputs
     public void PlayerUpdate()
     {
         PlayerMove();
-        anim.SetBool("Flip", !gravityFlip);
     }
 
     private void PlayerMove()
     {
         PlayerBody.linearVelocityY = playerMoveDir * Time.deltaTime;    
     }
+
+    private void FlipGravity()
+    {
+        gravityFlip = !gravityFlip;
+        PlayerBody.linearVelocityY = 0;
+
+        playerMoveDir = gravityFlip ? GravityPull : -GravityPull;
+
+        anim.SetBool("Flip", !gravityFlip);
+    }
+
+    private void PauseToggle()
+    {
+        Game.isPlaying = !Game.isPlaying;
+
+        PlayerBody.simulated = Game.isPlaying;
+
+    }
+
 }

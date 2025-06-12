@@ -6,7 +6,6 @@ using TMPro;
 
 public class Game : MonoBehaviour
 {
-
     [Header("Game Settings")]
     [SerializeField] private float globalSpeed = 6;
 
@@ -34,7 +33,7 @@ public class Game : MonoBehaviour
     private Objectpool healPool;
     private Objectpool nonePool;
 
-    public bool isPlaying = false;
+    public static bool isPlaying = false;
 
     private void Start()
     {
@@ -61,7 +60,7 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        isPlaying = inputs.PauseGame(keys.Pause, isPlaying);
+        inputs.PauseGame(keys.Pause);
 
         if (!isPlaying)
             return;
@@ -84,6 +83,7 @@ public class Game : MonoBehaviour
         if (speedText != null)
             speedText.text = globalSpeed.ToString("f1") + " M/s";
     }
+
     private void SpawnObject(Objectpool pool)
     {
         GameObject current = pool.Get();
@@ -115,6 +115,7 @@ public class Game : MonoBehaviour
             obj.transform.Translate(Vector2.left * globalSpeed * Time.fixedDeltaTime);
         }
     }
+
     private void CollisionCheck()
     {
         foreach (GameObject obj in activeObjects)
@@ -128,7 +129,6 @@ public class Game : MonoBehaviour
                 if (obj != dmg)
                     continue;
 
-                Debug.Log("DMG");
                 damagePool.ReturnToPool(obj);
                 player.TakeDamage(1);
                 return;
@@ -139,7 +139,6 @@ public class Game : MonoBehaviour
                 if (obj != heal)
                     continue;
 
-                Debug.Log("HEAL");
                 healPool.ReturnToPool(obj);
                 player.Heal(1);
                 return;
@@ -156,7 +155,6 @@ public class Game : MonoBehaviour
         }
     }
 
-
     private IEnumerator SpawnDamageObjects()
     {
         float timeRND = Random.Range(0.5f, 1f);
@@ -170,6 +168,7 @@ public class Game : MonoBehaviour
 
         StopCoroutine(SpawnDamageObjects());
     }
+
     private IEnumerator SpawnHealObjects()
     {
         float timeRND = Random.Range(0.3f, 2f);
@@ -184,7 +183,8 @@ public class Game : MonoBehaviour
         StopCoroutine(SpawnDamageObjects());
     }
 
-    //Instantiate from game script so I can put it into the objectpool script
+    //Objectpool can't instantiate so I made a sudo class to be able to instatiate
+    //Note: Pablo do not remove this :)
     public GameObject instantiateObject(GameObject prefab)
     {
         GameObject newObject = Instantiate(prefab);
