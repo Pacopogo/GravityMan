@@ -68,7 +68,6 @@ public class Game : MonoBehaviour
         if (!isPlaying)
             return;
 
-        CollisionCheck();
         UpdateActiveObjects();
 
         player.PlayerUpdate();
@@ -109,48 +108,48 @@ public class Game : MonoBehaviour
             }
 
             obj.transform.Translate(Vector2.left * globalSpeed * Time.fixedDeltaTime);
+            CollisionCheck(obj);
         }
     }
 
-    private void CollisionCheck()
+    private void CollisionCheck(GameObject obj)
     {
-        foreach (GameObject obj in activeObjects)
+
+        //Object to player collision check (if > false > continue)
+        if (!obj.GetComponent<Collider2D>().bounds.Intersects(player.Collider.bounds))
+            return;
+
+        foreach (GameObject dmg in damagePool.PoolObjects)
         {
-            //Object to player collision check (if > false > continue)
-            if (!obj.GetComponent<Collider2D>().bounds.Intersects(player.Collider.bounds))
+            if (obj != dmg)
                 continue;
 
-            foreach (GameObject dmg in damagePool.PoolObjects)
-            {
-                if (obj != dmg)
-                    continue;
+            obj.transform.position = new Vector3(-12, 0, 0);
+            player.TakeDamage(1);
 
-                obj.transform.position = new Vector3(-12, 0, 0);
-                player.TakeDamage(1);
-
-                return;
-            }
-
-            foreach (GameObject heal in healPool.PoolObjects)
-            {
-                if (obj != heal)
-                    continue;
-
-                obj.transform.position = new Vector3(-12, 0, 0);
-                player.Heal(1);
-
-                return;
-            }
-
-            foreach (GameObject none in nonePool.PoolObjects)
-            {
-                if (obj != none)
-                    continue;
-
-                obj.transform.position = new Vector3(-12, 0, 0);
-                return;
-            }
+            return;
         }
+
+        foreach (GameObject heal in healPool.PoolObjects)
+        {
+            if (obj != heal)
+                continue;
+
+            obj.transform.position = new Vector3(-12, 0, 0);
+            player.Heal(1);
+
+            return;
+        }
+
+        foreach (GameObject none in nonePool.PoolObjects)
+        {
+            if (obj != none)
+                continue;
+
+            obj.transform.position = new Vector3(-12, 0, 0);
+            return;
+        }
+
     }
 
     private IEnumerator SpawnDamageObjects()

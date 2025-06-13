@@ -23,7 +23,7 @@ public class Objectpool
         GameObject current;
         for (int i = 0; i < size; i++)
         {
-            current = Game.instantiateObject(prefab);
+            current = Game.InstantiateObject(prefab);
             current.SetActive(false);
             PoolObjects.Add(current);
         }
@@ -34,7 +34,7 @@ public class Objectpool
         GameObject current;
         for (int i = 0; i < poolSize; i++)
         {
-            current = Game.instantiateObject(PoolObjects[0]);
+            current = Game.InstantiateObject(PoolObjects[0]);
             current.SetActive(false);
             PoolObjects.Add(current);
         }
