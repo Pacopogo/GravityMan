@@ -27,7 +27,7 @@ public class Game : MonoBehaviour
     private List<GameObject> activeObjects = new List<GameObject>();
 
     [Header("Objectpool Settings")]
-    [SerializeField] private int PoolSize = 5;
+    [SerializeField] private int poolSize = 5;
 
     private Objectpool damagePool;
     private Objectpool healPool;
@@ -47,8 +47,8 @@ public class Game : MonoBehaviour
 
         BuildObjects();
 
-        damagePool = new Objectpool(damageObstacle.Prefab, PoolSize, this);
-        healPool = new Objectpool(healObstacle.Prefab, PoolSize, this);
+        damagePool = new Objectpool(damageObstacle.Prefab, poolSize, this);
+        healPool = new Objectpool(healObstacle.Prefab, poolSize, this);
     }
 
     private void Update()
