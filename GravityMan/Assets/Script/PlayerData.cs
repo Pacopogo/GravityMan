@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerData : IPlayerInputs
@@ -31,10 +32,9 @@ public class PlayerData : IPlayerInputs
         commandManager = new CommandManager(this);
 
         jumpAction += FlipGravity;
-        anim.SetBool("Flip", !gravityFlip);
-
-
         pauseAction += PauseToggle; 
+
+        anim.SetBool("Flip", !gravityFlip);
 
         Health = MaxHealth;
 
@@ -74,6 +74,9 @@ public class PlayerData : IPlayerInputs
         Health -= dmg;
 
         healthSlider.value = Health;
+
+        if (Health <= 0)
+            Death();
     }
 
     public void Heal(float heal)
@@ -111,7 +114,10 @@ public class PlayerData : IPlayerInputs
         Game.isPlaying = !Game.isPlaying;
 
         PlayerBody.simulated = Game.isPlaying;
-
     }
 
+    private void Death()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

@@ -1041,12 +1041,10 @@ MonoBehaviour:
     PlayerBody: {fileID: 1908951861}
     GravityPull: 450
   spawnRange: 4
-  obstacles:
-  - {fileID: 11400000, guid: d456ce73a5254e84f9683bfb28c0bc8c, type: 2}
-  - {fileID: 11400000, guid: 0cf7fe6df299ac04086a057d5f50adda, type: 2}
+  healObj: {fileID: 5389428761247643856, guid: 38f77e747462b984f825bae5afde8678, type: 3}
+  dmgObj: {fileID: 7890854642052672182, guid: 3a2cfc0412c1bc24c868db0eb8b20f16, type: 3}
   keys: {fileID: 11400000, guid: b5229384732e06a4b8a8e9c964e0ecf5, type: 2}
   PoolSize: 5
-  isPlaying: 1
 --- !u!1 &1391131551
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,11 +3793,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3956,7 +3954,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -3965,7 +3963,7 @@ ParticleSystem:
     scrollSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 4
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6332,6 +6330,38 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_text
+      value: 6:m/s
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_fontSize
+      value: 94.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 94.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805596668433389993, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4309377797049719650, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -6376,9 +6406,25 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321146645252535005, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9183172869949929526, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9183172869949929526, guid: ab7c57cef836369419f7ad55c6cdcff3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

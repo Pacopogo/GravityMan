@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using TMPro;
 
 public class Game : MonoBehaviour
@@ -17,7 +16,8 @@ public class Game : MonoBehaviour
 
     [Header("Object Data")]
     [SerializeField] private float spawnRange = 4f;
-    [SerializeField] private Obstacle[] obstacles;
+    [SerializeField] private GameObject healObj;
+    [SerializeField] private GameObject dmgObj;
 
     [Header("Input map")]
     [SerializeField] private PlayerInputKeys keys;
@@ -33,33 +33,27 @@ public class Game : MonoBehaviour
     private Objectpool healPool;
     private Objectpool nonePool;
 
-    public static bool isPlaying = false;
+    private GameObstacle damageObstacle;
+    private GameObstacle healObstacle;
+
+    public static bool isPlaying = true;
 
     private void Start()
     {
+
         inputs = player;
 
         player.PlayerStart();
 
-        foreach (var obj in obstacles)
-        {
-            switch (obj.Type)
-            {
-                case objectType.None:
-                    nonePool = new Objectpool(obj.prefab, PoolSize, this);
-                    break;
-                case objectType.Damage:
-                    damagePool = new Objectpool(obj.prefab, PoolSize, this);
-                    break;
-                case objectType.Heal:
-                    healPool = new Objectpool(obj.prefab, PoolSize, this);
-                    break;
-            }
-        }
+        BuildObjects();
+
+        damagePool = new Objectpool(damageObstacle.Prefab, PoolSize, this);
+        healPool = new Objectpool(healObstacle.Prefab, PoolSize, this);
     }
 
     private void Update()
     {
+
         inputs.PauseGame(keys.Pause);
 
         if (!isPlaying)
@@ -70,6 +64,7 @@ public class Game : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (!isPlaying)
             return;
 
@@ -78,14 +73,15 @@ public class Game : MonoBehaviour
 
         player.PlayerUpdate();
 
-        globalSpeed += 0.5f * Time.fixedDeltaTime;
+        globalSpeed += 1 * Time.fixedDeltaTime;
 
         if (speedText != null)
-            speedText.text = globalSpeed.ToString("f1") + " M/s";
+            speedText.text = globalSpeed.ToString("f0") + ":M/s";
     }
 
     private void SpawnObject(Objectpool pool)
     {
+
         GameObject current = pool.Get();
         float rnd = Random.Range(-spawnRange, spawnRange);
 
@@ -95,13 +91,13 @@ public class Game : MonoBehaviour
 
     private void UpdateActiveObjects()
     {
+
         if (activeObjects.Count == 0)
         {
             StartCoroutine(SpawnDamageObjects());
             StartCoroutine(SpawnHealObjects());
             return;
         }
-
 
         foreach (GameObject obj in activeObjects)
         {
@@ -121,7 +117,7 @@ public class Game : MonoBehaviour
         foreach (GameObject obj in activeObjects)
         {
             //Object to player collision check (if > false > continue)
-            if (!obj.GetComponent<Collider2D>().bounds.Contains(player.PlayerBody.position))
+            if (!obj.GetComponent<Collider2D>().bounds.Intersects(player.Collider.bounds))
                 continue;
 
             foreach (GameObject dmg in damagePool.PoolObjects)
@@ -129,8 +125,9 @@ public class Game : MonoBehaviour
                 if (obj != dmg)
                     continue;
 
-                damagePool.ReturnToPool(obj);
+                obj.transform.position = new Vector3(-12, 0, 0);
                 player.TakeDamage(1);
+
                 return;
             }
 
@@ -139,8 +136,9 @@ public class Game : MonoBehaviour
                 if (obj != heal)
                     continue;
 
-                healPool.ReturnToPool(obj);
+                obj.transform.position = new Vector3(-12, 0, 0);
                 player.Heal(1);
+
                 return;
             }
 
@@ -149,7 +147,7 @@ public class Game : MonoBehaviour
                 if (obj != none)
                     continue;
 
-                damagePool.ReturnToPool(obj);
+                obj.transform.position = new Vector3(-12, 0, 0);
                 return;
             }
         }
@@ -187,8 +185,24 @@ public class Game : MonoBehaviour
     //Note: Pablo do not remove this :)
     public GameObject instantiateObject(GameObject prefab)
     {
+
         GameObject newObject = Instantiate(prefab);
         return newObject;
+    }
+
+    private void BuildObjects()
+    {
+
+        damageObstacle = new GameObstacle.Builder()
+            .SetIsDamage(true)
+            .SetPrefab(dmgObj)
+            .SetSpeed(6)
+            .Build();
+
+        healObstacle = new GameObstacle.Builder()
+            .SetPrefab(healObj)
+            .SetSpeed(3)
+            .Build();
     }
 
 }
