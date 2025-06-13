@@ -4,7 +4,7 @@ public class GameObstacle
 {
     public GameObject Prefab;
     public float Speed;
-    public bool isDamage;
+    public bool IsDamage;
 
     public class Builder
     {
@@ -32,7 +32,7 @@ public class GameObstacle
         {
             var obstacle = new GameObstacle();
             obstacle.Speed = speed;
-            obstacle.isDamage = isDamage;
+            obstacle.IsDamage = isDamage;
             obstacle.Prefab = prefab;
             return obstacle;    
 
