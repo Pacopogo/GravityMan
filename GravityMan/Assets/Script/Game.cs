@@ -183,7 +183,7 @@ public class Game : MonoBehaviour
 
     //Objectpool can't instantiate so I made a sudo class to be able to instatiate
     //Note: Pablo do not remove this :)
-    public GameObject instantiateObject(GameObject prefab)
+    public GameObject InstantiateObject(GameObject prefab)
     {
 
         GameObject newObject = Instantiate(prefab);
