@@ -184,23 +184,21 @@ public class Game : MonoBehaviour
     //Note: Pablo do not remove this :)
     public GameObject InstantiateObject(GameObject prefab)
     {
-
         GameObject newObject = Instantiate(prefab);
         return newObject;
     }
 
     private void BuildObjects()
     {
-
-        damageObstacle = new GameObstacle.Builder()
-            .SetIsDamage(true)
-            .SetPrefab(dmgObj)
-            .SetSpeed(6)
+        damageObstacle = new Builder<GameObstacle>()
+            .SetVar(c => c.IsDamage = true)
+            .SetVar(c => c.Prefab = dmgObj)
+            .SetVar(c => c.Speed = 6)
             .Build();
 
-        healObstacle = new GameObstacle.Builder()
-            .SetPrefab(healObj)
-            .SetSpeed(3)
+        healObstacle = new Builder<GameObstacle>()
+            .SetVar(c => c.Prefab = healObj)
+            .SetVar(c => c.Speed = 3)
             .Build();
     }
 
