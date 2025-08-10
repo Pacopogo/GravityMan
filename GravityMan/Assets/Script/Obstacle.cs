@@ -1,12 +1,5 @@
 using UnityEngine;
 
-//public enum ObjectType
-//{
-//    None,
-//    Damage,
-//    Heal
-//}
-
 [CreateAssetMenu(fileName = "Obstacles", menuName = "Obstacle/Obstacle", order = 1)]
 public class Obstacle : ScriptableObject
 {
