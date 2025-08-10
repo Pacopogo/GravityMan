@@ -88,13 +88,4 @@ public class PlayerData : IPlayerInputs
         SceneManager.LoadScene(0);
     }
 
-    public void Jump(KeyCode[] key)
-    {
-        return;
-    }
-
-    public void PauseGame(KeyCode[] key)
-    {
-        return;
-    }
 }
