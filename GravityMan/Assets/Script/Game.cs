@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Game : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Game : MonoBehaviour
 
     [Header("Game UI components")]
     [SerializeField] private TMP_Text speedText;
+    [SerializeField] private GameObject pauseObject;
 
     [Header("Player Data")]
     [SerializeField] private PlayerData player;
@@ -36,10 +38,15 @@ public class Game : MonoBehaviour
     private GameObstacle damageObstacle;
     private GameObstacle healObstacle;
 
+    private CommandManager commandManager;
+    private PlayerInput jumpInput;
+    private PlayerInput pauseInput;
+
     public static bool isPlaying = true;
 
     private void Start()
     {
+        commandManager = new CommandManager(inputs);
 
         inputs = player;
 
@@ -53,13 +60,15 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
+        if (!Input.anyKey)
+            return;
 
-        inputs.PauseGame(keys.Pause);
+        pauseInput.CheckInput();
 
         if (!isPlaying)
             return;
 
-        inputs.Jump(keys.Jump);
+        jumpInput.CheckInput();
     }
 
     private void FixedUpdate()
@@ -76,6 +85,12 @@ public class Game : MonoBehaviour
 
         if (speedText != null)
             speedText.text = globalSpeed.ToString("f0") + ":M/s";
+    }
+
+    private void TogglePause()
+    {
+        isPlaying = !isPlaying;
+        pauseObject.SetActive(!isPlaying);
     }
 
     private void SpawnObject(Objectpool pool)
@@ -188,8 +203,35 @@ public class Game : MonoBehaviour
         return newObject;
     }
 
+    public void QuitGame()
+    {
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+            return;
+
+        Application.Quit();
+    }
+
     private void BuildObjects()
     {
+        //Note: when making new input put the actions at the added actions at the end
+
+        jumpInput = new Builder<PlayerInput>()
+            .SetVar(c => c.Keys = keys.Jump)
+            .SetVar(c => c.CommandManager = commandManager)
+            .SetVar(c => c.InputCommand = commandManager.Jump)
+            .SetVar(c => c.InputAction  += player.FlipGravity)
+            .Build();
+
+        pauseInput = new Builder<PlayerInput>()
+            .SetVar(c => c.Keys = keys.Pause)
+            .SetVar(c => c.CommandManager = commandManager)
+            .SetVar(c => c.InputCommand = commandManager.Pause)
+            .SetVar(c => c.InputAction += TogglePause)
+            .SetVar(c => c.InputAction += player.SimulatePlayerPhysics)
+            .Build();
+
+
+        //Note: make the obstacles underneath here
         damageObstacle = new Builder<GameObstacle>()
             .SetVar(c => c.IsDamage = true)
             .SetVar(c => c.Prefab = dmgObj)

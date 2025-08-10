@@ -24,15 +24,9 @@ public class PlayerData : IPlayerInputs
 
     private CommandManager commandManager;
 
-    private Action jumpAction;
-    private Action pauseAction;
-
     public void PlayerStart()
     {
         commandManager = new CommandManager(this);
-
-        jumpAction += FlipGravity;
-        pauseAction += PauseToggle; 
 
         anim.SetBool("Flip", !gravityFlip);
 
@@ -43,31 +37,6 @@ public class PlayerData : IPlayerInputs
 
     }
 
-    public void Jump(KeyCode[] key)
-    {
-        foreach (KeyCode keyCode in key)
-        {
-            if(!Input.GetKeyDown(keyCode))
-                continue;
-
-            commandManager.DoCommand(commandManager.Jump, jumpAction);
-
-            return;
-        }
-    }
-
-    public void PauseGame(KeyCode[] key)
-    {
-        foreach (KeyCode keyCode in key)
-        {
-            if (!Input.GetKeyDown(keyCode))
-                continue;
-
-            commandManager.DoCommand(commandManager.Pause, pauseAction);
-
-            return;
-        }
-    }
 
     public void TakeDamage(float dmg)
     {
@@ -96,10 +65,10 @@ public class PlayerData : IPlayerInputs
 
     private void PlayerMove()
     {
-        PlayerBody.linearVelocityY = playerMoveDir * Time.deltaTime;    
+        PlayerBody.linearVelocityY = playerMoveDir * Time.deltaTime;
     }
 
-    private void FlipGravity()
+    public void FlipGravity()
     {
         gravityFlip = !gravityFlip;
         PlayerBody.linearVelocityY = 0;
@@ -109,15 +78,23 @@ public class PlayerData : IPlayerInputs
         anim.SetBool("Flip", !gravityFlip);
     }
 
-    private void PauseToggle()
+    public void SimulatePlayerPhysics()
     {
-        Game.isPlaying = !Game.isPlaying;
-
         PlayerBody.simulated = Game.isPlaying;
     }
 
     private void Death()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void Jump(KeyCode[] key)
+    {
+        return;
+    }
+
+    public void PauseGame(KeyCode[] key)
+    {
+        return;
     }
 }
